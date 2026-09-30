@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: LinShot
 Upstream-Contact: MensuraMedia <mensuramedia@gmail.com>
-Source: https://github.com/MensuraMedia/linshot
+Source: https://github.com/MensuraMedia/linscreencapture
 
 Files: *
 Copyright: 2026 MensuraMedia

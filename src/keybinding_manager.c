@@ -152,7 +152,7 @@ static bool cinnamon_register(KeyBinding key, const char* exec_path) {
     run_cmd(cmd);
 
     // Set the name
-    run_cmd("dconf write /org/cinnamon/desktop/keybindings/custom-keybindings/custom0/name \"'LinShot Screenshot'\"");
+    run_cmd("dconf write /org/cinnamon/desktop/keybindings/custom-keybindings/custom0/name \"'LinScreenCapture Screenshot'\"");
 
     // Disable ALL Cinnamon built-in screenshot handlers to avoid conflict
     // Must use gsettings (not dconf write) — Cinnamon reads from gsettings
@@ -208,7 +208,7 @@ static bool gnome_register(KeyBinding key, const char* exec_path) {
     run_cmd(cmd);
 
     // Set name
-    run_cmd("dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/linshot/name \"'LinShot Screenshot'\"");
+    run_cmd("dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/linshot/name \"'LinScreenCapture Screenshot'\"");
 
     // Disable GNOME's built-in screenshot for the key
     if (key == KB_PRINTSCREEN) {

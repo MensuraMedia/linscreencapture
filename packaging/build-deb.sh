@@ -68,7 +68,7 @@ Depends: ${DEPENDS}
 Recommends: xdg-utils, xclip
 Installed-Size: ${INSTALLED_SIZE}
 Maintainer: MensuraMedia <mensuramedia@gmail.com>
-Homepage: https://github.com/MensuraMedia/linshot
+Homepage: https://github.com/MensuraMedia/linscreencapture
 Description: Modern screenshot tool for Linux with annotation support
  LinShot is a lightweight screenshot tool for Linux desktops that provides
  area capture with real-time visual feedback, annotation tools (arrows,

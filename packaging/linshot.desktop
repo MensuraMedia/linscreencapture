@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.2
 Type=Application
-Name=LinShot
+Name=LinScreenCapture
 GenericName=Screenshot Tool
 Comment=Capture, annotate, and share screenshots
 Exec=linshot

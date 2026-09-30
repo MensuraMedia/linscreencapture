@@ -21,7 +21,7 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     echo ""
 fi
 
-REPO_URL="https://github.com/MensuraMedia/linshot3.git"
+REPO_URL="https://github.com/MensuraMedia/linscreencapture.git"
 INSTALL_DIR="$HOME/.local/share/linshot"
 BIN_DIR="$HOME/.local/bin"
 APP_DIR="$HOME/.local/share/applications"

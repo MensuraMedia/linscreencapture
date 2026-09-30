@@ -1,6 +1,6 @@
-# Known Issues — LinShot 1.4.0 Beta
+# Known Issues — LinScreenCapture 1.4.0 Beta
 
-> LinShot is beta software. The keybinding system works reliably on **Linux Mint (Cinnamon)** but has known limitations on other desktop environments. This document tracks those issues and their severity.
+> LinScreenCapture is beta software. The keybinding system works reliably on **Linux Mint (Cinnamon)** but has known limitations on other desktop environments. This document tracks those issues and their severity.
 
 ---
 

@@ -54,8 +54,8 @@ sudo apt install cmake build-essential libgtk-3-dev libx11-dev libcairo2-dev dpk
 ### Step 2: Download and build the package
 
 ```bash
-git clone https://github.com/MensuraMedia/linshot3.git
-cd linshot3
+git clone https://github.com/MensuraMedia/linscreencapture.git
+cd linscreencapture
 bash packaging/build-deb.sh
 ```
 
@@ -113,8 +113,8 @@ pkg-config --modversion cairo      # Should show 1.x.x
 ### Step 2: Clone and build
 
 ```bash
-git clone https://github.com/MensuraMedia/linshot3.git
-cd linshot3
+git clone https://github.com/MensuraMedia/linscreencapture.git
+cd linscreencapture
 mkdir -p build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j$(nproc)
@@ -202,8 +202,8 @@ Run LinShot directly from the source tree without installing anything system-wid
 sudo apt install cmake build-essential libgtk-3-dev libx11-dev libcairo2-dev xclip
 
 # Clone and build
-git clone https://github.com/MensuraMedia/linshot3.git
-cd linshot3
+git clone https://github.com/MensuraMedia/linscreencapture.git
+cd linscreencapture
 mkdir -p build && cd build
 cmake .. && make -j$(nproc)
 
@@ -313,7 +313,7 @@ Name=LinShot
 GenericName=Screenshot Tool
 Comment=Capture, annotate, and share screenshots
 Exec=/full/path/to/linshot
-Icon=/full/path/to/linshot3/resources/icons/linshot-128.png
+Icon=/full/path/to/linscreencapture/resources/icons/linshot-128.png
 Terminal=false
 Categories=Utility;Graphics;GTK;
 Keywords=screenshot;capture;screen;annotation;
@@ -394,7 +394,7 @@ linshot --capture
 
 ### From .deb package
 ```bash
-cd linshot3
+cd linscreencapture
 git pull
 bash packaging/build-deb.sh
 sudo dpkg -i linshot_1.0.0_amd64.deb
@@ -402,7 +402,7 @@ sudo dpkg -i linshot_1.0.0_amd64.deb
 
 ### From source build
 ```bash
-cd linshot3
+cd linscreencapture
 git pull
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
@@ -414,5 +414,5 @@ make -j$(nproc)
 ## Getting Help
 
 - **Known issues:** [KNOWN_ISSUES.md](KNOWN_ISSUES.md)
-- **Bug reports:** [github.com/MensuraMedia/linshot3/issues](https://github.com/MensuraMedia/linshot3/issues)
-- **Source code:** [github.com/MensuraMedia/linshot3](https://github.com/MensuraMedia/linshot3)
+- **Bug reports:** [github.com/MensuraMedia/linscreencapture/issues](https://github.com/MensuraMedia/linscreencapture/issues)
+- **Source code:** [github.com/MensuraMedia/linscreencapture](https://github.com/MensuraMedia/linscreencapture)

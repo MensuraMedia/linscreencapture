@@ -2749,7 +2749,7 @@ static void create_about_page(GtkWidget* notebook, GtkCssProvider* css_provider)
     // App name
     GtkWidget* title = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(title),
-        "<span size='xx-large' weight='bold' foreground='#e0e0e0'>LinShot</span>");
+        "<span size='xx-large' weight='bold' foreground='#e0e0e0'>LinScreenCapture</span>");
     gtk_widget_set_halign(title, GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(vbox), title, FALSE, FALSE, 0);
 
@@ -2768,7 +2768,7 @@ static void create_about_page(GtkWidget* notebook, GtkCssProvider* css_provider)
     GtkWidget* desc = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(desc),
         "<span foreground='#cccccc'>"
-        "LinShot is a modern, open-source screenshot tool built for Linux Debian-based systems.\n\n"
+        "LinScreenCapture is a modern, open-source screenshot tool built for Linux Debian-based systems.\n\n"
         "Capture screenshots with real-time area selection, annotate with lines, arrows,\n"
         "rectangles, circles, text, borders, and freehand drawing. Blur regions to redact\n"
         "sensitive content. Use the marquee tool to select and copy regions, paste multiple\n"
@@ -2789,7 +2789,7 @@ static void create_about_page(GtkWidget* notebook, GtkCssProvider* css_provider)
         "<b>License:</b>   Open Source (CC BY-NC 4.0)\n"
         "<b>Platform:</b>  Linux (Debian, Ubuntu, Mint, and derivatives)\n"
         "<b>Toolkit:</b>    GTK 3 + Cairo + X11\n"
-        "<b>Source:</b>    github.com/MensuraMedia/linshot3"
+        "<b>Source:</b>    github.com/MensuraMedia/linscreencapture"
         "</span>");
     gtk_label_set_line_wrap(GTK_LABEL(details), TRUE);
     gtk_widget_set_halign(details, GTK_ALIGN_START);
@@ -2799,7 +2799,7 @@ static void create_about_page(GtkWidget* notebook, GtkCssProvider* css_provider)
     GtkWidget* footer = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(footer),
         "<span foreground='#666666' size='small'>"
-        "LinShot is currently in Beta and is undergoing continual updates.\n"
+        "LinScreenCapture is currently in Beta and is undergoing continual updates.\n"
         "Free for education, research, and personal projects.\n"
         "Commercial use requires explicit permission."
         "</span>");
@@ -3604,7 +3604,7 @@ static void toggle_autostart(bool enable) {
         if (file) {
             fprintf(file, "[Desktop Entry]\n");
             fprintf(file, "Type=Application\n");
-            fprintf(file, "Name=LinShot\n");
+            fprintf(file, "Name=LinScreenCapture\n");
             char* bin_path = get_binary_path();
             fprintf(file, "Exec=%s\n", bin_path);
             g_free(bin_path);
@@ -3646,7 +3646,7 @@ static void toggle_default_screenshot_app(bool enable) {
             fprintf(file, "[Desktop Entry]\n");
             fprintf(file, "Version=1.4\n");
             fprintf(file, "Type=Application\n");
-            fprintf(file, "Name=LinShot\n");
+            fprintf(file, "Name=LinScreenCapture\n");
             fprintf(file, "GenericName=Screenshot Tool\n");
             fprintf(file, "Comment=Capture, annotate, and share screenshots\n");
             fprintf(file, "Exec=%s\n", binary_path);
@@ -3768,7 +3768,7 @@ static void on_tray_popup(GtkStatusIcon* icon, guint button, guint activate_time
     g_signal_connect(capture_item, "activate", G_CALLBACK(on_tray_capture), win);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), capture_item);
 
-    GtkWidget* show_item = gtk_menu_item_new_with_label("Show LinShot");
+    GtkWidget* show_item = gtk_menu_item_new_with_label("Show LinScreenCapture");
     g_signal_connect(show_item, "activate", G_CALLBACK(on_tray_show), win);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), show_item);
 
@@ -3780,9 +3780,14 @@ static void on_tray_popup(GtkStatusIcon* icon, guint button, guint activate_time
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), quit_item);
 
     gtk_widget_show_all(menu);
-    gtk_menu_popup_at_pointer(GTK_MENU(menu), NULL);
-    (void)button;
-    (void)activate_time;
+
+    // Anchor the menu to the status icon under the pointer. Passing the real
+    // button/activate_time plus gtk_status_icon_position_menu positions the menu
+    // at the icon the user right-clicked; popup_at_pointer(NULL) discarded the
+    // trigger event and fell back to a wrong location away from the cursor.
+    gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
+                   gtk_status_icon_position_menu, icon,
+                   button, activate_time);
 }
 
 // Create the app icon (circle with dot) as a pixbuf at given size via Cairo
@@ -3829,7 +3834,7 @@ static void setup_tray_icon(MainWindow* win) {
     } else {
         win->tray_icon = gtk_status_icon_new_from_icon_name("camera-photo");
     }
-    gtk_status_icon_set_tooltip_text(win->tray_icon, "LinShot Screenshot Tool");
+    gtk_status_icon_set_tooltip_text(win->tray_icon, "LinScreenCapture Screenshot Tool");
     gtk_status_icon_set_visible(win->tray_icon, TRUE);
 
     g_signal_connect(win->tray_icon, "activate", G_CALLBACK(on_tray_activate), win);
@@ -3943,7 +3948,7 @@ bool main_window_init(MainWindow* win, int argc, char* argv[]) {
     win->tray_icon = NULL;
     win->minimize_to_tray = false;
 
-    gtk_window_set_title(GTK_WINDOW(win->window), "LinShot");
+    gtk_window_set_title(GTK_WINDOW(win->window), "LinScreenCapture");
     gtk_window_set_default_size(GTK_WINDOW(win->window), 800, 600);
 
     // Set application icon (generated via Cairo, no file dependency)
@@ -4112,7 +4117,7 @@ bool main_window_init(MainWindow* win, int argc, char* argv[]) {
     // Create buttons with icons and labels
     // Icon indices match SidebarIconType enum
     const char* button_labels[] = {
-        "LinShot", "Line", "Arrow", "Box", "Circle", "Text", "Select", "Flatten", "Copy",
+        "Capture", "Line", "Arrow", "Box", "Circle", "Text", "Select", "Flatten", "Copy",
         "Border", "Blur", "Crop", "Resize", "Rotate", "Bright", "Dupe", "Save"
     };
     typedef struct { char type; int id; } BtnDef;

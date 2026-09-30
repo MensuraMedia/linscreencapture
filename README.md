@@ -1,6 +1,6 @@
-# LinShot
+# LinScreenCapture
 
-LinShot is a modern, open-source screenshot tool built for Linux Debian-based systems. Capture screenshots with real-time area selection, annotate with a full suite of drawing tools, and browse your image files — all from a clean, dark-themed interface.
+LinScreenCapture is a modern, open-source screenshot tool built for Linux Debian-based systems. Capture screenshots with real-time area selection, annotate with a full suite of drawing tools, and browse your image files — all from a clean, dark-themed interface.
 
 **Version:** 1.4.0 Beta
 **Created:** January 2025
@@ -8,7 +8,7 @@ LinShot is a modern, open-source screenshot tool built for Linux Debian-based sy
 ## Quick Install (One Command)
 
 ```bash
-git clone https://github.com/MensuraMedia/linshot3.git && bash linshot3/install.sh
+git clone https://github.com/MensuraMedia/linscreencapture.git && bash linscreencapture/install.sh
 ```
 
 Installs dependencies, builds, and sets up desktop integration. Works on Debian, Ubuntu, Linux Mint, Pop!_OS, and derivatives. See [INSTALL.md](INSTALL.md) for other methods or [KNOWN_ISSUES.md](KNOWN_ISSUES.md) for keybinding notes.
@@ -127,8 +127,8 @@ Displays LinShot version, project description, and key details: creation date (J
 sudo apt install cmake build-essential libgtk-3-dev libx11-dev libcairo2-dev xclip
 
 # Build
-git clone https://github.com/MensuraMedia/linshot3.git
-cd linshot3
+git clone https://github.com/MensuraMedia/linscreencapture.git
+cd linscreencapture
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make
@@ -197,4 +197,4 @@ See [LICENSE](LICENSE) for details.
 
 ## Repository
 
-[github.com/MensuraMedia/linshot3](https://github.com/MensuraMedia/linshot3)
+[github.com/MensuraMedia/linscreencapture](https://github.com/MensuraMedia/linscreencapture)
