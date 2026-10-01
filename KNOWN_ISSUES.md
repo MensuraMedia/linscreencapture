@@ -146,7 +146,7 @@ These issues are tracked for resolution in future releases. The Cinnamon path (`
 
 ---
 
-## Clipboard — Image Not Pastable Into Terminal / Non-GTK Applications
+## Clipboard — Screenshot Won't Paste Into a Terminal / CLI Consumer (e.g. Claude Code)
 
 **Filed:** 2026-08-24
 **Status:** Resolved (packaging fix — no application code change)
@@ -161,9 +161,21 @@ another GTK application (GIMP, Firefox) works. But pasting into a terminal-based
 consumer — a CLI agent, an Electron app, a terminal emulator's image paste — yields nothing. The
 clipboard looks like it was only partially populated.
 
+### Producer vs. consumer (why "non-GTK" is about the *other* app)
+
+A clipboard paste has two parties, and "non-GTK" refers to the **consumer**, not this app:
+
+- **Producer** = LinScreenCapture (GTK). It owns the selection and advertises `image/png`.
+- **Consumer** = whatever you paste *into*. A GTK/GDK consumer (GIMP, Firefox) reads the
+  selection in-process, so it works. A non-GTK consumer (a terminal CLI like Claude Code) has
+  no GDK loop and shells out to `xclip`/`wl-paste` — so it fails when that helper is absent.
+
+LinScreenCapture being GTK is exactly *why* paste works into GIMP but not the terminal; the
+producer's toolkit does not help the consumer.
+
 ### Root cause
 
-**Not a defect in `copy_to_clipboard()`.** LinShot publishes the image correctly:
+**Not a defect in `copy_to_clipboard()`.** LinScreenCapture publishes the image correctly:
 
 - `gtk_clipboard_set_image()` takes ownership of the X11 `CLIPBOARD` selection.
 - `gtk_clipboard_store()` hands the payload to the session clipboard manager (`csd-clipboard` on
