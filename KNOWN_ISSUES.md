@@ -220,6 +220,34 @@ sudo apt install xclip
 No rebuild needed — this is a runtime dependency, not a code change. Take a new screenshot and the
 paste will work.
 
+### Why it kept recurring, and the fix that holds (2026-09-30 correction)
+
+This resurfaced, and a closer look corrected two earlier assumptions:
+
+- **Earlier claim (wrong):** "Cinnamon has no persistent clipboard manager, so the app must stay
+  running until you paste." **Correction:** `csd-clipboard` *is* running and *does* persist the
+  image — including the `image/png` target — after LinScreenCapture exits. Verified end-to-end:
+  a GTK producer set + stored an image, exited, and `xclip -selection clipboard -t image/png -o`
+  still returned a valid PNG. So the app does **not** need to stay open.
+
+- **Why prior "fixes" didn't hold:** evidence on this machine showed `xclip` had **never** been
+  apt-installed (no entry in apt/dpkg logs back to 2025), yet apt packages clearly persist here
+  (an unrelated package installed days earlier was still present). So the thing that "worked
+  before" was a *transient* `xclip` reachable from `$HOME` (most likely a `~/.local/bin/xclip`
+  shim) that got removed or overwritten between sessions — not a package. A non-executable shim
+  left in `~/.local/bin` is worse than nothing: that dir precedes `/usr/bin` on `PATH`
+  (`.profile`/`.bashrc`), so it *shadows* a real `xclip`.
+
+**The durable fix is the package**, because apt state persists in this environment:
+
+```bash
+sudo apt install xclip        # survives across sessions, like any apt package
+```
+
+Do not rely on a `~/.local/bin/xclip` shim as the fix. It is only durable if it is executable and
+not shadowing a real binary, and an automated agent cannot safely make it executable (installing an
+auto-invoked executable onto `PATH` is treated as an unauthorized-persistence action and is blocked).
+
 ### Wayland note
 
 The equivalent bridge on Wayland is `wl-clipboard` (`wl-paste`). LinShot's capture path is X11-only

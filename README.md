@@ -120,6 +120,31 @@ Displays LinShot version, project description, and key details: creation date (J
 
 ## Installation
 
+### Dependencies
+
+**Build:** `cmake`, `build-essential`, `libgtk-3-dev`, `libx11-dev`, `libcairo2-dev`
+
+**Runtime — clipboard:** LinScreenCapture copies each capture to the system clipboard itself (via
+GTK), so pasting into another GTK app (GIMP, Firefox) works out of the box. Pasting into a
+**terminal or other non-GTK app** (e.g. the Claude Code CLI) additionally requires a clipboard
+helper, because those consumers read the image by shelling out to one:
+
+| Session | Package | Provides |
+|---|---|---|
+| X11 (Cinnamon/Mint default) | `xclip` | `xclip -selection clipboard -t image/png -o` |
+| Wayland | `wl-clipboard` | `wl-paste --type image/png` |
+
+```bash
+# X11:
+sudo apt install xclip
+# Wayland:
+sudo apt install wl-clipboard
+```
+
+If a captured screenshot won't paste into a terminal app, this helper is almost always missing —
+see [KNOWN_ISSUES.md](KNOWN_ISSUES.md). The one-command install and the `.deb` pull `xclip` in
+automatically; a manual source build must install it as shown below.
+
 ### Build from source
 
 ```bash
